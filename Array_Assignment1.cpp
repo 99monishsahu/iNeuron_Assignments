@@ -419,3 +419,41 @@ Example 1:
 Input: nums = [1,2,2,4]
 Output: [2,3]
 */
+
+#include <iostream>
+using namespace std;
+
+int main() 
+{
+    //APPROACH
+    
+    /*
+    Suppose nums is the name of set of integers initially. 
+    1. Create an array arr of size N initialized with all 0's.
+    2. Scan the given set of integers array nums, and increase the corresponding index of 
+       newly created array with +1. arr[nums[i]]++;
+    3. If any index of arr is > 1 that is our duplicate number and If any index of arr is = 0
+       then it is our missing number.
+    */
+    
+    //Let size of given set of integers is 10.
+    int nums[10] = {5,8,7,3,4,9,1,2,0,6};
+    
+    //Suppose 2nd index value i.e 7 is corrupted and become 0.
+    nums[2] = 0;
+    
+    //Main Code
+    int size = sizeof(nums)/sizeof(nums[0]); //To calculate size of given array if not given
+    int arr[size]={0};
+    
+    for(int i=0; i<size; i++){
+      arr[nums[i]]++;
+    }
+    
+    for(int i=0; i<size; i++){
+      if(arr[i]>1) cout<<i<<",";
+    }
+    for(int i=0; i<size; i++){
+      if(arr[i]==0) cout<<i;
+    }
+}
