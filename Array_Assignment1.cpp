@@ -235,6 +235,101 @@ Explanation: The arrays we are merging are [1,2,3] and [2,5,6].
 The result of the merge is [1,2,2,3,5,6] with the underlined elements coming from nums1
 */
 
+#include <iostream>
+using namespace std;
+
+void merge(int a[], int beg, int mid, int end)    
+{    
+    int i, j, k;  
+    int n1 = mid - beg + 1;    
+    int n2 = end - mid;    
+      
+    int LeftArray[n1], RightArray[n2]; 
+      
+    for (int i = 0; i < n1; i++)    
+    LeftArray[i] = a[beg + i];    
+    for (int j = 0; j < n2; j++)    
+    RightArray[j] = a[mid + 1 + j];    
+      
+    i = 0; 
+    j = 0; 
+    k = beg; 
+      
+    while (i < n1 && j < n2)    
+    {    
+        if(LeftArray[i] <= RightArray[j])    
+        {    
+            a[k] = LeftArray[i];    
+            i++;    
+        }    
+        else    
+        {    
+            a[k] = RightArray[j];    
+            j++;    
+        }    
+        k++;    
+    }    
+    while (i<n1)    
+    {    
+        a[k] = LeftArray[i];    
+        i++;    
+        k++;    
+    }    
+      
+    while (j<n2)    
+    {    
+        a[k] = RightArray[j];    
+        j++;    
+        k++;    
+    }    
+}    
+  
+void mergeSort(int a[], int beg, int end)  
+{  
+    if (beg < end)   
+    {  
+        int mid = (beg + end) / 2;  
+        mergeSort(a, beg, mid);  
+        mergeSort(a, mid + 1, end);  
+        merge(a, beg, mid, end);  
+    }  
+}
+
+
+int main() 
+{
+    int m,n,i;
+    
+    cout<<"Enter size of array 1: "<<endl;
+    cin>>m;
+    cout<<"Enter size of array 2: "<<endl;
+    cin>>n;
+    
+    int nums1[m+n],nums2[n];
+    cout<<"Enter Integer values in nums1 : "<<endl;
+    for(i=0; i<m; i++){
+      cin>>nums1[i];
+    }
+    cout<<"Enter Integer values in nums2 : "<<endl;
+    for(i=0; i<n; i++){
+      cin>>nums2[i];
+    }
+    
+    //Main Code
+    int j=0;
+    for(i=m; i<m+n; i++){
+      nums1[i]=nums2[j];
+      j++;
+    }
+    
+    mergeSort(nums1,0,m+n-1);
+    
+    for(i=0; i<m+n; i++){
+      cout<<nums1[i];
+    }
+}
+
+
 /*Q6. Given an integer array nums, return true if any value appears at least twice in the array, and return false if every element is distinct.
 
 Example 1:
