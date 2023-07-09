@@ -70,7 +70,69 @@ int main()
 }
 
 /*
+Question 3.
 We define a harmonious array as an array where the difference between its maximum value and its minimum value is exactly 1.
 Given an integer array nums, return the length of its longest harmonious subsequence among all its possible subsequences.
 A subsequence of an array is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements.
 */
+
+
+/*
+Question 4
+You have a long flowerbed in which some of the plots are planted, and some are not.
+However, flowers cannot be planted in adjacent plots.
+Given an integer array flowerbed containing 0's and 1's, where 0 means empty and 1 means not empty, and an integer n, return true if n new flowers can be 
+planted in the flowerbed without violating the no-adjacent-flowers rule and false otherwise.
+
+Example 1:
+Input: flowerbed = [1,0,0,0,1], n = 1
+Output: true
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    vector<int> flowerbed = {1,0,0,1,0,0,1,0,0,1,0,1,0,1};
+    int flag=0;
+    
+    for(int i=0; i<flowerbed.size(); i++){
+      if(flowerbed[i]==0){
+        int j=i+1,k=j+1;
+        if(flowerbed[j]==0 && flowerbed[k]==0){
+          cout<<"True";
+          flag++;
+          break;
+        }
+        if(flowerbed[j]==1) i=j;
+        if(flowerbed[k]==1) i=k;
+      }
+    }
+    
+    if(flag==0){
+      cout<<"False"<<endl;
+    }
+}
+
+
+/*
+Question 5
+Given an integer array nums, find three numbers whose product is maximum and return the maximum product.
+
+Example 1:
+Input: nums = [1,2,3]
+Output: 6
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    vector<int> nums = {5,8,7,3,4,9,1,2,10,6};
+    sort(nums.begin(), nums.end());
+    int size = nums.size();
+    int maxProduct = nums[size-1]*nums[size-2]*nums[size-3];
+    cout<<maxProduct;
+}
