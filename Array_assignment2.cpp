@@ -42,3 +42,35 @@ The doctor advised Alice to only eat n / 2 of the candies she has (n is always e
 number of different types of candies while still following the doctor's advice. 
 Given the integer array candyType of length n, return the maximum number of different types of candies she can eat if she only eats n / 2 of them.
 */
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    vector<int> candyType = {1,8,2,1,2,2,2,8};
+    
+    int canEat = candyType.size()/2, maxType=1;
+    
+    sort(candyType.begin(), candyType.end());
+    
+    for(int i=0; i<candyType.size(); i++){
+      for(int j=i+1; j<candyType.size(); j++){
+        if(candyType[j]!=candyType[i]){
+          maxType++;
+          i=j-1;
+          break;
+        }
+      }
+    }
+    
+    if(canEat<maxType){
+      cout<<canEat<<endl;
+    }
+    else cout<<maxType<<endl;
+}
+
+/*
+We define a harmonious array as an array where the difference between its maximum value and its minimum value is exactly 1.
+Given an integer array nums, return the length of its longest harmonious subsequence among all its possible subsequences.
+A subsequence of an array is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements.
+*/
