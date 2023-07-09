@@ -75,7 +75,29 @@ We define a harmonious array as an array where the difference between its maximu
 Given an integer array nums, return the length of its longest harmonious subsequence among all its possible subsequences.
 A subsequence of an array is a sequence that can be derived from the array by deleting some or no elements without changing the order of the remaining elements.
 */
+#include <bits/stdc++.h>
+using namespace std;
 
+int main() 
+{
+    vector<int> nums = {1,3,2,2,5,2,3,7};
+    sort(nums.begin(), nums.end());
+    
+    int left = 0, result = 0, right = 1;
+    
+    while(right<nums.size()){
+      int diff = nums[right] - nums[left];
+      if(diff == 1){
+        result = max(result, (right - left + 1));
+      }
+      if(diff<=1){
+        right++;
+      }else left++;
+    }
+    
+    cout<<result;
+    
+}
 
 /*
 Question 4
@@ -136,3 +158,15 @@ int main()
     int maxProduct = nums[size-1]*nums[size-2]*nums[size-3];
     cout<<maxProduct;
 }
+
+/*
+Question 6
+Given an array of integers nums which is sorted in ascending order, and an integer target,
+write a function to search target in nums. If target exists, then return its index. Otherwise,
+return -1.
+
+You must write an algorithm with O(log n) runtime complexity.
+
+Input: nums = [-1,0,3,5,9,12], target = 9
+Output: 4
+*/
