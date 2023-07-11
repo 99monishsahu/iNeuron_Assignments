@@ -36,6 +36,54 @@ Given a sorted array of distinct integers and a target value, return the index i
 inserted in order.
 You must write an algorithm with O(log n) runtime complexity.
 */
+#include <iostream>
+using namespace std;
+
+int main() 
+{
+    int target,size_of_array,i=0;
+    
+    cout<<"Enter size of array(nums): "<<endl;
+    cin>>size_of_array;
+    
+    int end = size_of_array;
+    int mid = (i+end)/2;
+    
+    cout<<"Enter target value: "<<endl;
+    cin>>target;
+    
+    int nums[size_of_array];
+    cout<<"Enter values in array(nums): "<<endl;
+    for(i=0; i<size_of_array; i++){
+      cin>>nums[i];
+    }
+    
+    //Main Code
+    for(i=0; i<end; i=i+0){
+      mid = (i+end)/2;
+      if(nums[mid]==target){
+        cout<<mid;
+        break;
+      }
+      else{
+        if(i+1==end){
+          if(target<nums[i]){
+            cout<<"0";
+            break;
+          }
+          if(target>nums[end]){
+            cout<<end+1;
+            break;
+          }
+          cout<<i+1;
+          break;
+        }
+        if(nums[mid]<target) i = mid;
+        else end = mid;
+      }
+    }
+}
+//RUN HERE:https://www.onlinegdb.com/online_c++_compiler
 
 /*
 Question 5
