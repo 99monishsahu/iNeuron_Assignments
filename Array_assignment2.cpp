@@ -170,3 +170,87 @@ You must write an algorithm with O(log n) runtime complexity.
 Input: nums = [-1,0,3,5,9,12], target = 9
 Output: 4
 */
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    vector<int> nums = {0,1,3,5,7,9,11};
+    int high=nums.size()-1, low = 0, mid,flag=0, target = 8;
+    
+    while(low<=high){
+      mid = (high+low)/2;
+      if(nums[mid] == target){cout<<mid; flag = 1; break;}
+      else{
+        if(nums[mid]<target) low = mid + 1;
+        else high = mid-1;
+      }
+    }
+    
+    if(flag==0) cout<<"-1";
+}
+
+/* Question 7
+An array is monotonic if it is either monotone increasing or monotone decreasing.
+An array nums is monotone increasing if for all i <= j, nums[i] <= nums[j]. An array nums is monotone decreasing if for all i <= j, nums[i] >= nums[j].
+Given an integer array nums, return true if the given array is monotonic, or false otherwise.
+Example 1:
+Input: nums = [1,2,2,3]
+Output: true
+*/
+    
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    vector<int> nums = {0,1,3,3,7,9,11};
+    int md=0,mi=0,flag=0;
+    if(nums[0]<nums[1]) mi=1;
+    else md=1;
+    
+    if(mi){
+      for(int i=0; i<nums.size()-1; i++){
+        int j=i+1;
+        if(nums[i]>nums[j]){ cout<<"False"; flag=1; break;}
+      }
+    }
+    
+    if(md){
+      for(int i=0; i<nums.size()-1; i++){
+        int j=i+1;
+        if(nums[i]<nums[j]){ cout<<"False"; flag=1; break;}
+      }
+    }
+    
+    if(!flag) cout<<"True";
+    
+}
+/*
+Question 8
+You are given an integer array nums and an integer k.
+In one operation, you can choose any index i where 0 <= i < nums.length and change nums[i] to nums[i] + x where x is an integer from the range [-k, k]. 
+You can apply this operation at most once for each index i.
+The score of nums is the difference between the maximum and minimum elements in nums.
+Return the minimum score of nums after applying the mentioned operation at most once for each index in it.
+*/
+
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    vector<int> nums = {0,10};
+    sort(nums.begin(),nums.end());
+    int diff, k=2;
+        
+    if(nums[nums.size()-1]-k>=nums[0]+k){
+      diff=(nums[nums.size()-1]-k)-(nums[0]+k);
+    }
+    else{
+      int fl=nums[nums.size()-1]-nums[0]+k;
+      diff=nums[nums.size()-1]-fl-nums[0]+k;
+    }
+    cout<<diff;
+    
+}
