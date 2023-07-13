@@ -98,6 +98,21 @@ Question 6
 Given a non-empty array of integers nums, every element appears twice except for one. Find that single one.
 You must implement a solution with a linear runtime complexity and use only constant extra space.
 */
+class Solution {
+public:
+    int singleNumber(vector<int>& nums) {
+        unordered_map<int,int> mp;
+        for(int i=0;i<nums.size();i++){
+            mp[nums[i]]++;
+        }
+        for(auto i : mp){
+            if(i.second==1){
+                return i.first;
+            }
+        }
+        return -1;
+    }
+};
 
 
 /*
@@ -113,3 +128,20 @@ missing number is covered by one of the ranges.
 Question 8
 Given an array of meeting time intervals where intervals[i] = [starti, endi], determine if a person could attend all meetings.
 */
+#include <bits/stdc++.h>
+using namespace std;
+
+int main() 
+{
+    vector<vector<int>> nums = {{1,3},{4,2},{2,2},{2,4},{1,1}};
+    sort(nums.begin(),nums.end());
+    int flag=0;
+    for(int i=0; i<nums.size()-1; i++){
+      int j = i+1;
+      if(nums[i][1]>nums[j][0]){
+        cout<<"False";
+        flag=1;
+      }
+    }
+    if(!flag) cout<<"True";
+}
