@@ -32,7 +32,37 @@ Given an array nums of n integers, return an array of all the unique quadruplets
            ● nums[a] + nums[b] + nums[c] + nums[d] == target
 You may return the answer in any order.
 */
-
+class Solution {
+public:
+    vector<vector<int>> fourSum(vector<int>& nums, int target) {
+        int n = nums.size();
+        sort(nums.begin(), nums.end());
+        vector<vector<int>> output;
+        for(int i=0; i<n-3; i++){
+            for(int j=i+1; j<n-2; j++){
+                long long newTarget = (long long)target - (long long)nums[i] - (long long)nums[j];
+                int low = j+1, high = n-1;
+                while(low < high){
+                    if(nums[low] + nums[high] < newTarget){
+                        low++;
+                    }
+                    else if(nums[low] + nums[high] > newTarget){
+                        high--;
+                    }
+                    else{
+                        output.push_back({nums[i], nums[j], nums[low], nums[high]});
+                        int tempIndex1 = low, tempIndex2 = high;
+                        while(low < high && nums[low] == nums[tempIndex1]) low++;
+                        while(low < high && nums[high] == nums[tempIndex2]) high--;
+                    }
+                }
+                while(j+1 < n && nums[j] == nums[j+1]) j++;
+            }
+            while(i+1 < n && nums[i] == nums[i+1]) i++;
+        }
+        return output;
+    }
+};
 
 /*
 Question 3. A permutation of an array of integers is an arrangement of its members into a sequence or linear order.
@@ -49,7 +79,36 @@ If such an arrangement is not possible, the array must be rearranged as the lowe
 ● While the next permutation of arr = [3,2,1] is [1,2,3] because [3,2,1] does not have a lexicographical larger rearrangement.
 Given an array of integers nums, find the next permutation of nums. The replacement must be in place and use only constant extra memory.
 */
+class Solution {
+public:
+    void nextPermutation(vector<int>& nums) {
+        int index=-1;
+        for(int i=nums.size()-1;i>0;i--){
+            if(nums[i]>nums[i-1]){
+                index=i-1;
+                break;
+            }
+        }
+        //finding the break point 
+        // now stored in index
 
+        if(index==-1){
+            sort(nums.begin(),nums.end());
+            return ;
+        }
+        // if no break point we sort the array and return
+        // else
+        for(int i=nums.size()-1;i>index;i--){
+            if(nums[i]>nums[index]){
+                swap(nums[i],nums[index]);
+                break;
+            }
+        }
+        //swaping the min element which is greater than break point 
+        // and now sorting the remaining elements to get the next permutation
+        sort(nums.begin()+index+1,nums.end());
+    }
+};
 /*
 Question 4
 Given a sorted array of distinct integers and a target value, return the index if the target is found. If not, return the index where it would be if it were 
