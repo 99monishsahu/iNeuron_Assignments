@@ -230,7 +230,34 @@ A number x is considered missing if x is in the range [lower, upper] and x is no
 Return the shortest sorted list of ranges that exactly covers all the missing numbers. That is, no element of nums is included in any of the ranges, and each
 missing number is covered by one of the ranges.
 */
+#include <bits/stdc++.h>
+using namespace std;
 
+int main() 
+{
+  vector<int> nums = {0,10,15,33,50,75,99};
+  int lower = 0, upper = 99,i;
+  
+  vector<vector<int>> ans;
+  
+  if(nums[0]>lower) ans.push_back({lower,nums[0]-1});
+  
+  for(i=0; i<nums.size()-1; i++){
+    if(nums[i+1]-nums[i]>1){
+      ans.push_back({nums[i]+1,nums[i+1]-1});
+    }
+  }
+  
+  if(nums[nums.size()-1]<upper) ans.push_back({nums[nums.size()-1]+1,upper});
+  
+  for(i=0; i<ans.size(); i++){
+    for(int j=0; j<ans[i].size(); j++){
+      cout<<ans[i][j]<<" ";
+    }
+    cout<<endl;
+  }
+  
+}
 
 /*
 Question 8
